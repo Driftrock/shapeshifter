@@ -4,4 +4,5 @@ module Shapeshifter
 end
 
 require "shapeshifter/shifter"
+require "shapeshifter/shift_chain"
 require 'shapeshifter/null_shifter'

@@ -1,11 +1,6 @@
 module Shapeshifter
   class NullShifter < Shifter
-    def initialize
-      @first_shifter = nil
-      @next_shifter = nil
-    end
-
-    def shift(_, res)
+    def shift(res)
       res
     end
   end

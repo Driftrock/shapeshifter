@@ -1,41 +1,31 @@
 module Shapeshifter
   class Shifter
-    attr_accessor :first_shifter, :next_shifter
+    attr_reader :source_object
 
-
-    def initialize
-      @first_shifter = self
-      @next_shifter = NullShifter.new
+    def initialize(source_object)
+      @source_object = source_object
     end
 
     class << self
       def chain(shifter)
-        self.new.chain(shifter)
+        ShiftChain.new(self).chain(shifter)
+      end
+
+      def shift(source_object, target_object)
+        ShiftChain.new(self).shift(source_object, target_object)
+      end
+
+      def revert(source_object, target_object)
+        ShiftChain.new(self).revert(source_object, target_object)
       end
     end
-
-    def chain(shifter)
-      shifter = shifter.new if shifter.is_a?(Class)
-      shifter.first_shifter = first_shifter
-      @next_shifter = shifter
-      shifter
-    end
-
-    def transform(start_object, end_object)
-      current = self.first_shifter
-      result = end_object
-      begin
-        result = first_shifter.shift(start_object.dup, result)
-      end while current.next?
-      result
-    end
     
-    def shift(_, _)
+    def shift(_)
       raise NoMethodError.new('Should be overridden')
     end
 
-    def next?
-      !next_shifter.nil?
+    def revert(_)
+      raise NoMethodError.new('Should be overridden')
     end
   end
 end

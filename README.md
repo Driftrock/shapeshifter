@@ -7,7 +7,7 @@ TODO: Write a gem description
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'shape'
+gem 'shapeshifter'
 ```
 
 And then execute:
