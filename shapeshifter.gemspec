@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["max@driftrock.com"]
   spec.summary       = %q{Shapeshifter allows you to transform data types}
   spec.description   = %q{}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/Driftrock/shapeshifter"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
