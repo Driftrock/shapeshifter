@@ -28,6 +28,24 @@ module Shapeshifter
       end
     end
 
+    context 'when a reversion is made' do
+      before do
+        test_shifter = double(TestShifter)
+        allow(TestShifter).to receive(:new).and_return(test_shifter)
+        allow(test_shifter).to receive(:revert) do |target|
+          target[:a] = Array(target[:a]).concat(target[:b])
+          target
+        end
+      end
+
+      it 'should change the passed target' do
+        target = { a: 1, b: [2, 3] }
+        expect do
+          TestShifter.revert({}, target)
+        end.to change { target }.to eq ({ a: [1, 2, 3], b: [2, 3] })
+      end
+    end
+
     context 'when a shift is made' do
       before do
         test_shifter = double(TestShifter)
@@ -45,11 +63,5 @@ module Shapeshifter
         end.to change { target }.to eq ({ a: [1, 2, 3], b: [2, 3] })
       end
     end
-  #
-  #class TestShifter < Shifter
-  #  def shift(old_object, new_object)
-  #    new_oib
-  #  end
-  #end
   end
 end

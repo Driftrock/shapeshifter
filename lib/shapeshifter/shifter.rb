@@ -20,6 +20,7 @@ module Shapeshifter
       end
     end
     
+    # :nocov:
     def shift(_)
       raise NoMethodError.new('Should be overridden')
     end
@@ -27,5 +28,6 @@ module Shapeshifter
     def revert(_)
       raise NoMethodError.new('Should be overridden')
     end
+    # :nocov:
   end
 end
